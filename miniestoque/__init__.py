@@ -1,3 +1,7 @@
+"""
+Pacote MiniEstoque.
 
-# Deixa o pacote "miniestoque" pronto para ser importado
+Importa as funções principais para facilitar o uso do framework.
+"""
+
 from .estoque import *

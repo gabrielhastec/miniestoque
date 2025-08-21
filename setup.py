@@ -1,3 +1,9 @@
+"""
+Script de configuração do pacote MiniEstoque.
+
+Utiliza setuptools para empacotar e instalar o framework.
+"""
+
 from setuptools import setup, find_packages
 
 setup(

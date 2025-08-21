@@ -1,9 +1,26 @@
+"""
+Módulo principal do MiniEstoque.
+
+Fornece funções para cadastro, listagem, movimentação e relatórios de produtos no estoque.
+"""
+
 from .database import get_connection, create_tables
 
 # Inicializa o banco na primeira vez
 create_tables()
 
 def cadastrar_produto(nome, quantidade, preco):
+    """
+    Cadastra um novo produto no estoque.
+
+    Args:
+        nome (str): Nome do produto.
+        quantidade (int): Quantidade inicial em estoque (>= 0).
+        preco (float): Preço unitário do produto (>= 0).
+
+    Raises:
+        ValueError: Se quantidade ou preço forem negativos, ou se o produto já existir.
+    """
     if quantidade < 0 or preco < 0:
         raise ValueError("Quantidade e preço devem ser maiores ou iguais a zero.")
     
@@ -24,6 +41,12 @@ def cadastrar_produto(nome, quantidade, preco):
     conn.close()
 
 def listar_produtos():
+    """
+    Retorna a lista de produtos cadastrados no estoque.
+
+    Returns:
+        list: Lista de tuplas (id, nome, quantidade, preco) dos produtos.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT id, nome, quantidade, preco FROM produtos")
@@ -32,6 +55,16 @@ def listar_produtos():
     return produtos
 
 def registrar_entrada(produto_id, quantidade):
+    """
+    Adiciona unidades ao estoque de um produto e registra a movimentação.
+
+    Args:
+        produto_id (int): ID do produto.
+        quantidade (int): Quantidade a adicionar (> 0).
+
+    Raises:
+        ValueError: Se quantidade for menor ou igual a zero.
+    """
     if quantidade <= 0:
         raise ValueError("Quantidade deve ser maior que zero.")
     
@@ -51,6 +84,16 @@ def registrar_entrada(produto_id, quantidade):
     conn.close()
 
 def registrar_saida(produto_id, quantidade):
+    """
+    Remove unidades do estoque de um produto e registra a movimentação.
+
+    Args:
+        produto_id (int): ID do produto.
+        quantidade (int): Quantidade a remover (> 0).
+
+    Raises:
+        ValueError: Se quantidade for menor ou igual a zero, produto não existir ou estoque insuficiente.
+    """
     if quantidade <= 0:
         raise ValueError("Quantidade deve ser maior que zero.")
     
@@ -84,6 +127,12 @@ def registrar_saida(produto_id, quantidade):
 def relatorio_estoque_baixo(limite=5):
     """
     Retorna produtos com quantidade menor ou igual ao limite.
+
+    Args:
+        limite (int): Quantidade máxima para considerar estoque baixo.
+
+    Returns:
+        list: Lista de tuplas (id, nome, quantidade, preco) dos produtos com estoque baixo.
     """
     conn = get_connection()
     cursor = conn.cursor()
@@ -98,6 +147,12 @@ def relatorio_estoque_baixo(limite=5):
 def historico_movimentacoes(produto_id):
     """
     Retorna o histórico de movimentações de um produto.
+
+    Args:
+        produto_id (int): ID do produto.
+
+    Returns:
+        list: Lista de tuplas (tipo, quantidade, data) das movimentações do produto.
     """
     conn = get_connection()
     cursor = conn.cursor()
