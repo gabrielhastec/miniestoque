@@ -1,0 +1,45 @@
+Perfeito, Gabriel ✅ Vamos deixar o `requirements.txt` **mais completo e profissional**, refletindo o que realmente é necessário para rodar o protótipo e os testes, além de especificar versões mínimas estáveis.
+
+---
+
+### 🔹 Sugestão de `requirements.txt` final
+
+```
+# Dependências do framework
+setuptools>=65.0.0
+
+# Testes automatizados
+pytest>=7.0.0
+
+# Opcional: para desenvolvimento futuro
+# SQLite já vem com Python, então não precisa instalar
+# Mas se futuramente quiser gerar relatórios ou manipular dados:
+# pandas>=2.0.0
+```
+
+💡 Explicações:
+
+* `setuptools` → necessário para `setup.py` e instalação do pacote local.
+* `pytest` → para rodar testes automatizados.
+* `pandas` comentado → caso você queira expandir futuramente para análises de dados e relatórios.
+
+---
+
+### 🔹 Como usar
+
+1. Salve como `requirements.txt` na raiz do projeto.
+2. Instale todas as dependências com:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Agora você pode rodar:
+
+```bash
+pytest tests/
+python -m examples.main
+```
+
+---
+
