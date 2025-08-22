@@ -1,3 +1,9 @@
+"""
+Módulo de acesso ao banco de dados SQLite para o MiniEstoque.
+
+Responsável por criar as tabelas e fornecer conexão ao banco.
+"""
+
 import sqlite3
 import os
 
@@ -7,9 +13,20 @@ os.makedirs(DB_DIR, exist_ok=True)  # Cria a pasta se não existir
 DB_PATH = os.path.join(DB_DIR, "estoque.db")
 
 def get_connection():
+    """
+    Retorna uma conexão SQLite para o banco de dados do estoque.
+
+    Returns:
+        sqlite3.Connection: Conexão ativa com o banco de dados.
+    """
     return sqlite3.connect(DB_PATH)
 
 def create_tables():
+    """
+    Cria as tabelas 'produtos' e 'movimentacoes' no banco de dados, caso não existam.
+
+    Executa comandos SQL para garantir que as tabelas necessárias estejam presentes.
+    """
     conn = get_connection()
     cursor = conn.cursor()
 
