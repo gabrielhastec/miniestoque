@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "miniestoque.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "estoque.db")
 
 class Database:
     _conn = None
