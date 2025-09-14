@@ -1,0 +1,1 @@
+# MiniEstoque - pacote principal
