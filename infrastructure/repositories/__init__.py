@@ -1,0 +1,1 @@
+from .produto_repository import ProdutoRepository
